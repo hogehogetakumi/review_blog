@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="{META_DESCRIPTION}">
+  <meta property="og:title" content="{TITLE}">
+  <meta property="og:description" content="{META_DESCRIPTION}">
+  <meta property="og:type" content="article">
+  <title>{TITLE}</title>
+
+  <!-- 構造化データ: Product + Review -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Product",
+        "name": "{PRODUCT_NAME}",
+        "description": "{PRODUCT_DESCRIPTION}",
+        "review": {
+          "@type": "Review",
+          "reviewRating": {
+            "@type": "Rating",
+            "ratingValue": "{RATING}",
+            "bestRating": "5"
+          },
+          "author": { "@type": "Person", "name": "編集部" }
+        }
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "{FAQ_Q1}",
+            "acceptedAnswer": { "@type": "Answer", "text": "{FAQ_A1}" }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --primary: #ff6b35;
+      --primary-light: #fff3ee;
+      --secondary: #2d6a4f;
+      --text: #333;
+      --text-light: #666;
+      --border: #e0e0e0;
+      --merit: #4CAF50;
+      --demerit: #f44336;
+      --star: #ffd700;
+      --max-width: 780px;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Hiragino Kaku Gothic ProN', 'Meiryo', sans-serif;
+      color: var(--text);
+      line-height: 1.8;
+      background: #fafafa;
+    }
+
+    .container { max-width: var(--max-width); margin: 0 auto; padding: 0 16px; }
+
+    /* ヒーロー */
+    .hero {
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+      color: white;
+      padding: 48px 16px;
+      text-align: center;
+    }
+    .hero-label {
+      display: inline-block;
+      background: var(--primary);
+      color: white;
+      font-size: 0.75rem;
+      font-weight: bold;
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 16px;
+      letter-spacing: 0.05em;
+    }
+    .hero h1 {
+      font-size: clamp(1.4rem, 4vw, 2rem);
+      line-height: 1.4;
+      margin-bottom: 16px;
+    }
+    .hero-sub { color: #aaa; font-size: 0.9rem; margin-bottom: 24px; }
+    .hero-rating { display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 32px; }
+    .stars { color: var(--star); font-size: 1.4rem; }
+    .rating-score { font-size: 2rem; font-weight: bold; }
+    .rating-count { color: #aaa; font-size: 0.85rem; }
+
+    /* CTA ボタン */
+    .cta-wrap { text-align: center; margin: 32px 0; }
+    .cta-button {
+      background: linear-gradient(135deg, var(--primary) 0%, #e84e0f 100%);
+      color: white;
+      padding: 18px 40px;
+      border-radius: 50px;
+      font-size: 1.05rem;
+      font-weight: bold;
+      text-decoration: none;
+      display: inline-block;
+      box-shadow: 0 6px 20px rgba(255, 107, 53, 0.45);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .cta-button:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(255, 107, 53, 0.5); }
+    .cta-note { font-size: 0.78rem; color: var(--text-light); margin-top: 8px; }
+
+    /* セクション共通 */
+    section { background: white; margin: 16px 0; padding: 40px 16px; }
+    h2 {
+      font-size: 1.3rem;
+      border-left: 4px solid var(--primary);
+      padding-left: 12px;
+      margin-bottom: 20px;
+    }
+    h3 { font-size: 1.1rem; margin: 20px 0 10px; color: #444; }
+
+    /* 目次 */
+    .toc { background: var(--primary-light); border-radius: 8px; padding: 20px; }
+    .toc h2 { border-color: var(--primary); }
+    .toc ol { padding-left: 20px; }
+    .toc li { margin: 6px 0; }
+    .toc a { color: var(--primary); text-decoration: none; }
+
+    /* こんな人向け */
+    .target-list { list-style: none; }
+    .target-list li { padding: 8px 0 8px 28px; position: relative; border-bottom: 1px dashed var(--border); }
+    .target-list li::before { content: "✓"; position: absolute; left: 0; color: var(--merit); font-weight: bold; }
+
+    /* スペック表 */
+    .spec-table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+    .spec-table th, .spec-table td { padding: 10px 14px; border: 1px solid var(--border); text-align: left; }
+    .spec-table th { background: #f5f5f5; width: 35%; font-weight: 600; }
+
+    /* メリット・デメリット */
+    .merit-demerit { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    @media (max-width: 600px) { .merit-demerit { grid-template-columns: 1fr; } }
+    .merit-box, .demerit-box { border-radius: 8px; padding: 16px; }
+    .merit-box { border-left: 4px solid var(--merit); background: #f1f8f1; }
+    .demerit-box { border-left: 4px solid var(--demerit); background: #fef1f1; }
+    .merit-box h3 { color: var(--merit); }
+    .demerit-box h3 { color: var(--demerit); }
+    .merit-box ul, .demerit-box ul { list-style: none; padding: 0; }
+    .merit-box li, .demerit-box li { padding: 5px 0 5px 20px; position: relative; font-size: 0.95rem; }
+    .merit-box li::before { content: "○"; position: absolute; left: 0; color: var(--merit); }
+    .demerit-box li::before { content: "×"; position: absolute; left: 0; color: var(--demerit); }
+
+    /* 比較表 */
+    .compare-wrap { overflow-x: auto; }
+    .compare-table { width: 100%; border-collapse: collapse; min-width: 500px; font-size: 0.9rem; }
+    .compare-table th, .compare-table td { padding: 10px 12px; border: 1px solid var(--border); text-align: center; }
+    .compare-table th { background: #f5f5f5; }
+    .compare-table .highlight { background: var(--primary-light); font-weight: bold; }
+
+    /* 総合評価 */
+    .total-rating { background: var(--primary-light); border-radius: 12px; padding: 24px; text-align: center; margin: 20px 0; }
+    .total-score { font-size: 3rem; font-weight: bold; color: var(--primary); }
+
+    /* FAQ */
+    .faq-item { border-bottom: 1px solid var(--border); padding: 16px 0; }
+    .faq-q { font-weight: bold; padding-left: 28px; position: relative; margin-bottom: 8px; }
+    .faq-q::before { content: "Q"; position: absolute; left: 0; color: var(--primary); font-weight: bold; }
+    .faq-a { padding-left: 28px; color: var(--text-light); position: relative; }
+    .faq-a::before { content: "A"; position: absolute; left: 0; color: var(--secondary); font-weight: bold; }
+
+    /* フッター */
+    footer { background: #1a1a1a; color: #888; text-align: center; padding: 24px; font-size: 0.8rem; }
+    footer a { color: #aaa; }
+  </style>
+</head>
+<body>
+
+<!-- ヒーローセクション -->
+<div class="hero">
+  <div class="container">
+    <span class="hero-label">PR / アフィリエイト広告</span>
+    <h1>{CATCH_COPY}<br>{PRODUCT_NAME} レビュー</h1>
+    <p class="hero-sub">実際に使って分かった正直な評価をお届けします</p>
+    <div class="hero-rating">
+      <span class="stars">★★★★★</span>
+      <span class="rating-score">{RATING}</span>
+      <span class="rating-count">/ 5.0</span>
+    </div>
+    <div class="cta-wrap">
+      <a href="{AFFILIATE_URL}" rel="nofollow sponsored noopener" target="_blank" class="cta-button">
+        公式サイトで詳細を確認する →
+      </a>
+      <p class="cta-note">※公式サイトに移動します</p>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- 目次 -->
+  <section>
+    <div class="toc">
+      <h2>この記事でわかること</h2>
+      <ol>
+        <li><a href="#target">こんな人におすすめ</a></li>
+        <li><a href="#spec">商品概要・スペック</a></li>
+        <li><a href="#review">実際に使ってみたレビュー</a></li>
+        <li><a href="#merit">メリット・デメリット</a></li>
+        <li><a href="#compare">他商品との比較</a></li>
+        <li><a href="#faq">よくある質問</a></li>
+        <li><a href="#summary">総合評価・まとめ</a></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- こんな人向け -->
+  <section id="target">
+    <h2>こんな人に向いています</h2>
+    <ul class="target-list">
+      <li>{TARGET_1}</li>
+      <li>{TARGET_2}</li>
+      <li>{TARGET_3}</li>
+    </ul>
+  </section>
+
+  <!-- 商品概要 -->
+  <section id="spec">
+    <h2>{PRODUCT_NAME} の基本情報</h2>
+    <table class="spec-table">
+      <tr><th>商品名</th><td>{PRODUCT_NAME}</td></tr>
+      <tr><th>価格</th><td>{PRICE}</td></tr>
+      <tr><th>特徴</th><td>{FEATURE}</td></tr>
+      <tr><th>公式サイト</th><td><a href="{AFFILIATE_URL}" rel="nofollow sponsored noopener" target="_blank">こちら</a></td></tr>
+    </table>
+  </section>
+
+  <!-- CTA（中間） -->
+  <div class="cta-wrap">
+    <a href="{AFFILIATE_URL}" rel="nofollow sponsored noopener" target="_blank" class="cta-button">
+      今すぐ公式サイトを見る →
+    </a>
+  </div>
+
+  <!-- レビュー本文 -->
+  <section id="review">
+    <h2>実際に使ってみた感想</h2>
+    <p>{REVIEW_BODY}</p>
+  </section>
+
+  <!-- メリット・デメリット -->
+  <section id="merit">
+    <h2>メリット・デメリット</h2>
+    <div class="merit-demerit">
+      <div class="merit-box">
+        <h3>メリット</h3>
+        <ul>
+          <li>{MERIT_1}</li>
+          <li>{MERIT_2}</li>
+          <li>{MERIT_3}</li>
+        </ul>
+      </div>
+      <div class="demerit-box">
+        <h3>デメリット</h3>
+        <ul>
+          <li>{DEMERIT_1}</li>
+          <li>{DEMERIT_2}</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 比較表 -->
+  <section id="compare">
+    <h2>他商品との比較</h2>
+    <div class="compare-wrap">
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>比較項目</th>
+            <th class="highlight">{PRODUCT_NAME}</th>
+            <th>{COMPETITOR_1}</th>
+            <th>{COMPETITOR_2}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>価格</td>
+            <td class="highlight">{PRICE}</td>
+            <td>{COMP1_PRICE}</td>
+            <td>{COMP2_PRICE}</td>
+          </tr>
+          <tr>
+            <td>評価</td>
+            <td class="highlight">★{RATING}</td>
+            <td>★{COMP1_RATING}</td>
+            <td>★{COMP2_RATING}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq">
+    <h2>よくある質問</h2>
+    <div class="faq-item">
+      <p class="faq-q">{FAQ_Q1}</p>
+      <p class="faq-a">{FAQ_A1}</p>
+    </div>
+    <div class="faq-item">
+      <p class="faq-q">{FAQ_Q2}</p>
+      <p class="faq-a">{FAQ_A2}</p>
+    </div>
+  </section>
+
+  <!-- 総合評価 -->
+  <section id="summary">
+    <h2>総合評価・まとめ</h2>
+    <div class="total-rating">
+      <div class="stars">★★★★★</div>
+      <div class="total-score">{RATING} <span style="font-size:1rem;color:#666">/ 5.0</span></div>
+    </div>
+    <p>{SUMMARY_BODY}</p>
+    <div class="cta-wrap" style="margin-top:32px">
+      <a href="{AFFILIATE_URL}" rel="nofollow sponsored noopener" target="_blank" class="cta-button">
+        公式サイトで購入する →
+      </a>
+      <p class="cta-note">※本記事はアフィリエイト広告を含みます</p>
+    </div>
+  </section>
+
+</div><!-- /container -->
+
+<footer>
+  <p>本記事はアフィリエイト広告（Amazonアソシエイト等）を含みます。</p>
+  <p style="margin-top:8px">掲載情報は執筆時点のものです。最新情報は公式サイトをご確認ください。</p>
+</footer>
+
+</body>
+</html>
