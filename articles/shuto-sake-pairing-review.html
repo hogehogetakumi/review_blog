@@ -486,6 +486,18 @@
     .mt-16 { margin-top: 16px; }
     .mt-24 { margin-top: 24px; }
     .small { font-size: 0.83rem; color: var(--text-mid); }
+
+    @media (max-width: 600px) {
+      .floating-cta {
+        position: fixed; bottom: 20px; left: 10px; right: 10px; z-index: 1000;
+        background: linear-gradient(135deg, var(--navy) 0%, var(--indigo) 100%);
+        color: #fff; text-align: center; padding: 15px;
+        border-radius: 4px; font-weight: bold; text-decoration: none;
+        box-shadow: 0 4px 20px rgba(13,31,53,0.45); font-size: 0.95rem;
+        display: block; border: 1px solid rgba(201,168,76,0.4);
+      }
+    }
+    @media (min-width: 601px) { .floating-cta { display: none; } }
   </style>
 </head>
 <body>
@@ -820,6 +832,8 @@
   <p>掲載価格・在庫状況は記事執筆時点（2026年5月）のものです。最新情報は楽天市場の商品ページをご確認ください。</p>
   <p style="margin-top:8px">お酒は20歳になってから。飲酒運転は法律で禁止されています。</p>
 </footer>
+
+<a href="https://hb.afl.rakuten.co.jp/ichiba/539aca7d.9eade61b.539aca7e.1379a97f/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fsmilespoon%2Fs000962%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D" rel="nofollow sponsored noopener" target="_blank" class="floating-cta">日本酒との黄金ペアリングを試してみる →</a>
 
 </body>
 </html>

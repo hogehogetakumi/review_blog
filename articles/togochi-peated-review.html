@@ -420,6 +420,18 @@
     .mt-24 { margin-top: 24px; }
     .small { font-size: 0.83rem; color: var(--text-mid); }
     .text-center { text-align: center; }
+
+    @media (max-width: 600px) {
+      .floating-cta {
+        position: fixed; bottom: 20px; left: 10px; right: 10px; z-index: 1000;
+        background: linear-gradient(135deg, var(--amber) 0%, var(--amber-bright) 100%);
+        color: #fff; text-align: center; padding: 15px;
+        border-radius: 6px; font-weight: bold; text-decoration: none;
+        box-shadow: 0 4px 20px rgba(193,127,36,0.5); font-size: 0.95rem;
+        display: block;
+      }
+    }
+    @media (min-width: 601px) { .floating-cta { display: none; } }
   </style>
 </head>
 <body>
@@ -687,6 +699,8 @@
   <p>掲載価格・在庫状況は記事執筆時点（2026年5月）のものです。最新情報は楽天市場の商品ページをご確認ください。</p>
   <p style="margin-top:8px">お酒は20歳になってから。飲酒運転は法律で禁止されています。妊娠中・授乳中の方は飲酒をお控えください。</p>
 </footer>
+
+<a href="https://a.r10.to/hkNzVD" rel="nofollow sponsored noopener" target="_blank" class="floating-cta">楽天で詳細・在庫を確認する →</a>
 
 </body>
 </html>

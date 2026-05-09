@@ -509,6 +509,18 @@
     .mt-24 { margin-top: 24px; }
     .small { font-size: 0.85rem; color: var(--text-mid); }
 
+    @media (max-width: 600px) {
+      .floating-cta {
+        position: fixed; bottom: 20px; left: 10px; right: 10px; z-index: 1000;
+        background: linear-gradient(135deg, var(--gold) 0%, #e8c040 100%);
+        color: var(--dark); text-align: center; padding: 15px;
+        border-radius: 50px; font-weight: bold; text-decoration: none;
+        box-shadow: 0 4px 20px rgba(201,168,76,0.5); font-size: 0.95rem;
+        display: block;
+      }
+    }
+    @media (min-width: 601px) { .floating-cta { display: none; } }
+
     /* ===== 引用ボックス ===== */
     .voice-box {
       background: #fffbf0;
@@ -658,7 +670,7 @@
   <!-- ===== CTA（中間） ===== -->
   <div class="cta-wrap">
     <a href="https://a.r10.to/h5LB0e" rel="nofollow sponsored noopener" target="_blank" class="cta-btn">
-      楽天市場で詳細・在庫を確認する →
+      父の日に間に合う在庫状況をチェックする →
     </a>
     <p class="cta-note">※化粧箱入りのため、そのままギフトに使えます</p>
   </div>
@@ -796,7 +808,7 @@
         <p class="price-detail">750ml × 2本｜化粧箱入り・説明書付き</p>
       </div>
       <a href="https://a.r10.to/h5LB0e" rel="nofollow sponsored noopener" target="_blank" class="cta-btn" style="font-size:0.9rem;padding:14px 28px;">
-        楽天で在庫を確認 →
+        父の日に間に合う在庫状況をチェックする →
       </a>
     </div>
   </section>
@@ -883,6 +895,8 @@
   <p>掲載価格・在庫状況は記事執筆時点（2026年5月）のものです。最新情報は楽天市場の商品ページをご確認ください。</p>
   <p style="margin-top:8px">本記事の内容はお酒の購入・贈答を推奨するものです。20歳未満の方への販売・提供はできません。</p>
 </footer>
+
+<a href="https://a.r10.to/h5LB0e" rel="nofollow sponsored noopener" target="_blank" class="floating-cta">父の日に間に合う在庫状況をチェックする →</a>
 
 </body>
 </html>
