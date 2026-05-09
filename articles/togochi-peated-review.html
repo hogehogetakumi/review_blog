@@ -180,7 +180,10 @@
     .cta-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 32px rgba(193,127,36,0.55); }
     .cta-wrap { text-align: center; margin: 36px 0; }
     .cta-note { font-size: 0.75rem; color: var(--text-light); margin-top: 10px; font-family: sans-serif; }
-    .rakuten-wrap { display: flex; justify-content: center; margin: 16px 0 8px; }
+    @media (max-width: 480px) {
+      .cta-btn { display: block; width: 100%; text-align: center; padding-left: 16px; padding-right: 16px; box-sizing: border-box; }
+    }
+    .rakuten-wrap { display: flex; justify-content: center; margin: 16px 0 8px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
 
     /* ===== セクション ===== */
     .section {

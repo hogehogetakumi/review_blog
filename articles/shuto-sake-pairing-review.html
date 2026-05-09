@@ -174,7 +174,7 @@
     .rating-num { font-size: 1.7rem; font-weight: 900; color: var(--gold); }
     .rating-sub { font-size: 0.78rem; color: #888; font-family: sans-serif; }
 
-    .rakuten-wrap { display: flex; justify-content: center; margin: 16px 0 8px; }
+    .rakuten-wrap { display: flex; justify-content: center; margin: 16px 0 8px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
 
     /* ===== ボタン ===== */
     .cta-btn {
@@ -193,6 +193,9 @@
     .cta-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(201,168,76,0.5); }
     .cta-wrap { text-align: center; margin: 36px 0; }
     .cta-note { font-size: 0.74rem; color: var(--text-light); margin-top: 10px; font-family: sans-serif; }
+    @media (max-width: 480px) {
+      .cta-btn { display: block; width: 100%; text-align: center; padding-left: 16px; padding-right: 16px; box-sizing: border-box; }
+    }
 
     /* ===== セクション ===== */
     .section {
