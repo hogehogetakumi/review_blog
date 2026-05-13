@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="仮想通貨の自動売買プログラムを24時間動かしたいWEBエンジニアが、クラウドを諦めて自宅の古いノートPCをサーバー代わりに使った話。メモリ増設で12GBにした結果と、コスパ最強のおすすめPCも紹介。">
+  <meta property="og:title" content="安いノートPCをサーバー代わりに使うのがコスパ最強だった｜24時間プログラムを動かすエンジニアの実践記">
+  <meta property="og:description" content="クラウドより安く24時間プログラムを動かす方法。自宅の余りノートPCにメモリを増設してサーバー化した実体験と、これから始める人向けのコスパ最強PC2選。">
+  <meta property="og:type" content="article">
+  <title>安いノートPCをサーバー代わりに使うのがコスパ最強だった｜24時間プログラムを動かすエンジニアの実践記</title>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "安いノートPCをサーバー代わりに使うのがコスパ最強だった",
+    "description": "仮想通貨の自動売買プログラムを24時間動かすため、クラウドを断念して自宅の古いノートPCをサーバー化した実践記録。",
+    "author": { "@type": "Person", "name": "リアルレポ編集部" }
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "自宅のノートPCをサーバー代わりに使うときの注意点は？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "常時起動するため電気代と発熱に注意が必要です。また、インターネット回線が止まるとプログラムも止まります。自宅回線の安定性を事前に確認しておくと安心です。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "メモリは何GB以上あればサーバー用途に使えますか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "軽いプログラムを1〜2個動かす程度であれば8GBで十分な場合が多いです。複数のプロセスを並行して動かしたいなら12GB以上あると余裕が生まれます。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "クラウドサービスと自宅PCサーバー、どちらが安いですか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "既にPCがある場合は自宅PCが圧倒的に安く、ランニングコストは電気代のみです。新しくPCを購入する場合でも、1〜2年で初期費用をクラウド月額費用が上回るケースがほとんどです。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "古いPCでも24時間稼働に耐えられますか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "CPUやメモリのスペックが最低限あれば問題ありません。ただし冷却ファンが詰まっていたり、バッテリーが劣化していると過熱・シャットダウンのリスクがあります。ACアダプタで常時給電し、定期的に内部を清掃することで長期運用が可能です。"
+        }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --dark:         #0f1623;
+      --navy:         #1e3251;
+      --navy-light:   #263d66;
+      --blue:         #2563eb;
+      --blue-bright:  #60a5fa;
+      --green:        #16a34a;
+      --green-bright: #22c55e;
+      --green-light:  #dcfce7;
+      --amber:        #d97706;
+      --amber-light:  #fef3c7;
+      --text:         #1e293b;
+      --text-mid:     #475569;
+      --text-light:   #94a3b8;
+      --bg:           #f8fafc;
+      --white:        #ffffff;
+      --border:       #e2e8f0;
+      --shadow:       rgba(0,0,0,0.07);
+    }
+
+    body {
+      font-family: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, 'Hiragino Sans', sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.8;
+      font-size: 16px;
+    }
+
+    a { color: var(--blue); text-decoration: none; }
+    img { max-width: 100%; height: auto; display: block; }
+
+    .container {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 0 18px;
+    }
+
+    /* === Hero === */
+    .hero {
+      background: linear-gradient(145deg, var(--dark) 0%, var(--navy) 60%, #1a2f4a 100%);
+      color: #fff;
+      padding: 56px 20px 48px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -60px; right: -60px;
+      width: 250px; height: 250px;
+      background: radial-gradient(circle, rgba(37,99,235,0.15) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -80px; left: -80px;
+      width: 280px; height: 280px;
+      background: radial-gradient(circle, rgba(22,163,74,0.10) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .hero-cat {
+      display: inline-block;
+      background: rgba(37,99,235,0.3);
+      border: 1px solid rgba(96,165,250,0.4);
+      color: var(--blue-bright);
+      font-size: 0.7rem;
+      letter-spacing: 0.14em;
+      padding: 4px 14px;
+      border-radius: 20px;
+      margin-bottom: 18px;
+      text-transform: uppercase;
+    }
+    .hero h1 {
+      font-size: 1.7rem;
+      font-weight: 900;
+      line-height: 1.4;
+      margin-bottom: 18px;
+      color: #fff;
+    }
+    .hero h1 .accent {
+      background: linear-gradient(135deg, var(--green-bright) 0%, var(--blue-bright) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-lead {
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.78);
+      max-width: 560px;
+      margin: 0 auto 28px;
+      line-height: 1.8;
+    }
+    .hero-tags {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .hero-tag {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: rgba(255,255,255,0.7);
+      font-size: 0.72rem;
+      padding: 4px 12px;
+      border-radius: 20px;
+    }
+
+    /* === Breadcrumb-style profile === */
+    .author-bar {
+      background: #fff;
+      border-bottom: 1px solid var(--border);
+      padding: 10px 18px;
+    }
+    .author-bar-inner {
+      max-width: 760px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.78rem;
+      color: var(--text-mid);
+    }
+    .author-icon {
+      width: 32px; height: 32px;
+      background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      flex-shrink: 0;
+    }
+
+    /* === Section === */
+    .section {
+      padding: 44px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .section:last-of-type { border-bottom: none; }
+
+    h2 {
+      font-size: 1.28rem;
+      font-weight: 800;
+      color: var(--navy);
+      margin-bottom: 18px;
+      padding-left: 14px;
+      border-left: 4px solid var(--blue);
+      line-height: 1.45;
+    }
+    h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin: 24px 0 10px;
+    }
+    p { margin-bottom: 14px; line-height: 1.85; }
+    ul, ol { padding-left: 22px; margin-bottom: 14px; }
+    li { margin-bottom: 6px; line-height: 1.75; }
+
+    /* === TOC === */
+    .toc {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+      border-radius: 12px;
+      padding: 26px 28px;
+    }
+    .toc-title {
+      font-size: 0.75rem;
+      letter-spacing: 0.14em;
+      color: var(--blue-bright);
+      margin-bottom: 14px;
+      text-transform: uppercase;
+    }
+    .toc ol { padding-left: 20px; }
+    .toc li { margin-bottom: 7px; }
+    .toc a { color: rgba(255,255,255,0.82); font-size: 0.88rem; }
+    .toc a:hover { color: var(--blue-bright); }
+
+    /* === Story Box === */
+    .story-box {
+      background: var(--white);
+      border-radius: 12px;
+      border-left: 4px solid var(--blue);
+      padding: 22px 24px;
+      margin-bottom: 18px;
+      box-shadow: 0 2px 8px var(--shadow);
+    }
+    .story-box-title {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--blue);
+      letter-spacing: 0.08em;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+    }
+
+    /* === Comparison Table === */
+    .comp-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin-top: 18px; }
+    .comp-table { width: 100%; min-width: 480px; border-collapse: collapse; font-size: 0.87rem; }
+    .comp-table thead tr { background: var(--navy); }
+    .comp-table thead th { color: var(--blue-bright); padding: 12px 14px; text-align: left; font-weight: 600; font-size: 0.78rem; letter-spacing: 0.05em; white-space: nowrap; }
+    .comp-table tbody td { padding: 12px 14px; border-bottom: 1px solid var(--border); vertical-align: middle; line-height: 1.5; }
+    .comp-table tbody tr:nth-child(even) td { background: #f8fafc; }
+    .comp-table .comp-this-row td { background: var(--green-light); border-left: 3px solid var(--green); font-weight: 600; }
+    .comp-badge { display: inline-block; background: var(--green); color: #fff; font-size: 0.6rem; padding: 2px 7px; border-radius: 20px; font-weight: bold; margin-left: 5px; white-space: nowrap; }
+    .comp-note { font-size: 0.73rem; color: var(--text-light); margin-top: 10px; }
+    .icon-good { color: var(--green); font-weight: bold; }
+    .icon-mid  { color: var(--amber); font-weight: bold; }
+    .icon-bad  { color: #dc2626; font-weight: bold; }
+
+    /* === Spec/Info Box === */
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 16px;
+    }
+    @media (max-width: 480px) { .info-grid { grid-template-columns: 1fr; } }
+    .info-card {
+      background: #fff;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      padding: 16px 18px;
+    }
+    .info-card-label {
+      font-size: 0.72rem;
+      color: var(--text-light);
+      font-weight: 600;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .info-card-value {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--navy);
+    }
+    .info-card-sub {
+      font-size: 0.78rem;
+      color: var(--text-mid);
+      margin-top: 4px;
+    }
+    .info-card.highlight { background: var(--green-light); border-color: var(--green-bright); }
+    .info-card.highlight .info-card-value { color: var(--green); }
+
+    /* === Use Case List === */
+    .usecase-list {
+      list-style: none;
+      padding: 0;
+    }
+    .usecase-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.9rem;
+    }
+    .usecase-list li:last-child { border-bottom: none; }
+    .usecase-icon {
+      background: var(--navy);
+      color: #fff;
+      width: 28px; height: 28px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      flex-shrink: 0;
+    }
+    .usecase-body strong { display: block; font-weight: 700; color: var(--navy); margin-bottom: 2px; }
+
+    /* === Product Cards === */
+    .product-card {
+      background: #fff;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      padding: 22px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 12px var(--shadow);
+    }
+    .product-card-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    .product-badge {
+      font-size: 0.68rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+    .product-badge.new { background: var(--blue); color: #fff; }
+    .product-badge.used { background: var(--amber); color: #fff; }
+    .product-card-title {
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: var(--navy);
+      line-height: 1.45;
+    }
+    .product-spec-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin: 14px 0;
+    }
+    @media (max-width: 480px) { .product-spec-grid { grid-template-columns: 1fr 1fr; } }
+    .product-spec-item {
+      background: #f8fafc;
+      border-radius: 8px;
+      padding: 8px 10px;
+      text-align: center;
+    }
+    .product-spec-item .label { font-size: 0.65rem; color: var(--text-light); margin-bottom: 3px; }
+    .product-spec-item .value { font-size: 0.82rem; font-weight: 700; color: var(--navy); }
+    .product-point {
+      background: var(--amber-light);
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-size: 0.85rem;
+      color: #92400e;
+      margin-bottom: 14px;
+    }
+    .product-point strong { color: var(--amber); }
+    .product-widget {
+      margin-top: 14px;
+      overflow-x: auto;
+    }
+    .product-widget > table,
+    .product-widget > td > div {
+      max-width: 100%;
+    }
+
+    /* === Merit Box === */
+    .merit-box {
+      background: var(--green-light);
+      border: 1px solid #86efac;
+      border-radius: 10px;
+      padding: 20px 22px;
+      margin-bottom: 14px;
+    }
+    .merit-box h3 { color: #14532d; font-size: 0.95rem; margin: 0 0 12px; }
+    .merit-list { list-style: none; padding: 0; }
+    .merit-list li { padding-left: 20px; position: relative; margin-bottom: 8px; font-size: 0.9rem; line-height: 1.7; }
+    .merit-list li::before { content: '✓'; position: absolute; left: 0; color: var(--green); font-weight: 700; }
+
+    .caution-box {
+      background: #fff7ed;
+      border: 1px solid #fed7aa;
+      border-radius: 10px;
+      padding: 20px 22px;
+      margin-bottom: 14px;
+    }
+    .caution-box h3 { color: #9a3412; font-size: 0.95rem; margin: 0 0 12px; }
+    .caution-list { list-style: none; padding: 0; }
+    .caution-list li { padding-left: 20px; position: relative; margin-bottom: 8px; font-size: 0.9rem; line-height: 1.7; }
+    .caution-list li::before { content: '△'; position: absolute; left: 0; color: var(--amber); }
+
+    /* === FAQ === */
+    .faq-item { border: 1px solid var(--border); border-radius: 10px; margin-bottom: 12px; overflow: hidden; }
+    .faq-q { background: #eff6ff; padding: 15px 20px; font-weight: 700; font-size: 0.91rem; color: var(--navy); display: flex; align-items: flex-start; gap: 10px; }
+    .faq-icon-q { background: var(--blue); color: #fff; font-size: 0.68rem; font-weight: 900; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+    .faq-a { background: #fff; padding: 15px 20px; font-size: 0.87rem; line-height: 1.8; color: var(--text-mid); display: flex; align-items: flex-start; gap: 10px; }
+    .faq-icon-a { background: var(--navy); color: #fff; font-size: 0.68rem; font-weight: 900; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
+
+    /* === Summary Box === */
+    .summary-box {
+      background: linear-gradient(135deg, #eff6ff 0%, #f0fdf4 100%);
+      border: 1px solid #bfdbfe;
+      border-radius: 12px;
+      padding: 22px 24px;
+      margin-top: 18px;
+    }
+    .summary-box ul { list-style: none; padding: 0; }
+    .summary-box li { padding: 8px 0 8px 26px; position: relative; border-bottom: 1px solid rgba(37,99,235,0.1); font-size: 0.9rem; line-height: 1.7; }
+    .summary-box li:last-child { border-bottom: none; }
+    .summary-box li::before { content: '◆'; position: absolute; left: 0; color: var(--blue); font-size: 0.68rem; top: 11px; }
+
+    /* === CTA Block === */
+    .cta-block {
+      background: linear-gradient(135deg, var(--navy) 0%, #1a3a6f 100%);
+      border-radius: 16px;
+      padding: 28px 22px;
+      text-align: center;
+      color: #fff;
+      margin: 28px 0;
+    }
+    .cta-block p { color: rgba(255,255,255,0.78); font-size: 0.9rem; margin-bottom: 16px; }
+    .cta-btn {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--green) 0%, #15803d 100%);
+      color: #fff;
+      font-size: 0.95rem;
+      font-weight: 700;
+      padding: 14px 34px;
+      border-radius: 50px;
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      box-shadow: 0 4px 18px rgba(22,163,74,0.4);
+    }
+    .ad-note { font-size: 0.7rem; color: rgba(255,255,255,0.42); margin-top: 10px; }
+
+    /* === Float CTA === */
+    .float-cta {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      background: linear-gradient(135deg, var(--dark) 0%, var(--navy) 100%);
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      z-index: 100;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+    .float-cta-text { color: rgba(255,255,255,0.78); font-size: 0.76rem; flex: 1; line-height: 1.45; }
+    .float-cta-text strong { color: var(--green-bright); }
+    .float-cta-btn {
+      display: inline-block;
+      background: var(--green);
+      color: #fff;
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 10px 18px;
+      border-radius: 40px;
+      text-decoration: none;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    /* === Footer === */
+    .footer {
+      background: var(--dark);
+      color: rgba(255,255,255,0.4);
+      text-align: center;
+      padding: 28px 20px 100px;
+      font-size: 0.73rem;
+      line-height: 1.85;
+    }
+    .footer a { color: rgba(255,255,255,0.38); text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+<!-- ===== Hero ===== -->
+<div class="hero">
+  <p class="hero-cat">Tech / Engineer Life</p>
+  <h1>安いノートPCをサーバー代わりに使うのが<br><span class="accent">コスパ最強</span>だった件</h1>
+  <p class="hero-lead">
+    仮想通貨の自動売買プログラムを24時間動かしたい。<br>
+    でもメインPCは占有できないし、クラウドは毎月お金がかかる。<br>
+    そんな悩みの答えが、押入れで眠っていた古いノートPCだった。
+  </p>
+  <div class="hero-tags">
+    <span class="hero-tag">🍺 お酒好きエンジニアの雑記</span>
+    <span class="hero-tag">💻 ノートPC活用術</span>
+    <span class="hero-tag">📈 仮想通貨 自動売買</span>
+  </div>
+</div>
+
+<!-- Author Bar -->
+<div class="author-bar">
+  <div class="author-bar-inner">
+    <div class="author-icon">👨‍💻</div>
+    <span>WEBエンジニア・お酒好き｜今年やってよかったことシリーズ</span>
+  </div>
+</div>
+
+<!-- ===== Main Content ===== -->
+<div class="container">
+
+  <!-- TOC -->
+  <section class="section" id="toc">
+    <div class="toc">
+      <p class="toc-title">この記事でわかること</p>
+      <ol>
+        <li><a href="#background">なぜ専用の実行環境が必要だったか</a></li>
+        <li><a href="#comparison">クラウド vs 自宅PCのコスパ比較</a></li>
+        <li><a href="#howto">実際にやったこと：古いPCをサーバー化した手順</a></li>
+        <li><a href="#potential">12GBメモリの余力でできること</a></li>
+        <li><a href="#recommend">コスパ最強のおすすめノートPC 2選</a></li>
+        <li><a href="#merit">メリット・注意点</a></li>
+        <li><a href="#faq">よくある質問</a></li>
+        <li><a href="#summary">まとめ</a></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- Background -->
+  <section class="section" id="background">
+    <h2>なぜ専用の実行環境が必要だったか</h2>
+
+    <p>私はWEBエンジニアで、仮想通貨の自動売買プログラムを自作して動かしている。このプログラム、一度起動したら<strong>24時間365日、止めずに動かし続けることが前提</strong>だ。</p>
+
+    <p>ところが普段使いのメインPCで動かすと、いくつか困ったことが起きる。</p>
+
+    <ul>
+      <li>動画編集や開発作業など、重い処理をすると影響が出る</li>
+      <li>再起動するたびにプログラムが止まってしまう</li>
+      <li>「そのソフト止めていい？」という場面で止められない心理的プレッシャー</li>
+    </ul>
+
+    <p>要するに、<strong>専用の実行環境が1台欲しかった</strong>のだ。</p>
+  </section>
+
+  <!-- Comparison -->
+  <section class="section" id="comparison">
+    <h2>クラウド vs 自宅PCのコスパ比較</h2>
+
+    <p>最初に考えたのはクラウドサービスだ。AWSのEC2でもさくらのVPSでも、仮想サーバーを借りれば専用環境はすぐに手に入る。</p>
+    <p>だが、試算してみると月額費用がじわじわと気になり始めた。「年間で換算したらそれなりの金額になる……」と思い直し、別の手を考えた。</p>
+
+    <div class="comp-table-wrap">
+      <table class="comp-table">
+        <thead>
+          <tr>
+            <th>方法</th>
+            <th>初期費用</th>
+            <th>月額ランニングコスト</th>
+            <th>手間</th>
+            <th>安定性</th>
+            <th>拡張性</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>クラウド（VPS等）</td>
+            <td>なし</td>
+            <td class="icon-bad">数百〜数千円/月</td>
+            <td class="icon-good">◎ほぼ不要</td>
+            <td class="icon-good">◎高い</td>
+            <td class="icon-good">◎課金で即拡張</td>
+          </tr>
+          <tr class="comp-this-row">
+            <td>自宅の余りノートPC<span class="comp-badge">今回の選択</span></td>
+            <td>メモリ増設代のみ</td>
+            <td class="icon-good">◎ 電気代のみ（数百円/月）</td>
+            <td class="icon-mid">△ 自分でセットアップ</td>
+            <td class="icon-mid">△ 自宅回線依存</td>
+            <td class="icon-mid">△ 物理的な上限あり</td>
+          </tr>
+          <tr>
+            <td>新しく安いPCを購入</td>
+            <td>1〜3万円程度</td>
+            <td class="icon-good">◎ 電気代のみ</td>
+            <td class="icon-mid">△ 初期セットアップ</td>
+            <td class="icon-mid">△ 自宅回線依存</td>
+            <td class="icon-mid">△ スペック固定</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="comp-note">※クラウドの月額は構成により大きく異なります。自宅PCの電気代は常時稼働のノートPC（30〜50W）を目安に算出。</p>
+
+    <p style="margin-top:18px">既にPCが手元にある場合、<strong>ランニングコストは電気代のみ</strong>。クラウドと比較すると、長期で見たときのコスト差は歴然だ。</p>
+  </section>
+
+  <!-- How To -->
+  <section class="section" id="howto">
+    <h2>実際にやったこと：古いPCをサーバー化した手順</h2>
+
+    <p>押入れを漁ったら、7年前に買ったWindowsノートPCが出てきた。CPU は Ryzen 3、当時は普通に使えていたスペックだ。</p>
+
+    <h3>問題はメモリが4GBしかなかったこと</h3>
+    <p>さすがにメモリ4GBでは心許ない。複数のプロセスを同時に動かすには、もう少し余裕が欲しかった。そこで8GBのメモリモジュールを別途購入して増設した。</p>
+
+    <div class="info-grid">
+      <div class="info-card">
+        <div class="info-card-label">増設前</div>
+        <div class="info-card-value">4 GB</div>
+        <div class="info-card-sub">プロセスが重なると不安定</div>
+      </div>
+      <div class="info-card highlight">
+        <div class="info-card-label">増設後（現在）</div>
+        <div class="info-card-value">12 GB</div>
+        <div class="info-card-sub">複数プロセスを同時実行しても余裕</div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-label">CPU</div>
+        <div class="info-card-value">Ryzen 3</div>
+        <div class="info-card-sub">7年前のモデル。実行のみなら十分</div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-label">運用期間</div>
+        <div class="info-card-value">今年から</div>
+        <div class="info-card-sub">24時間常時稼働で問題なし</div>
+      </div>
+    </div>
+
+    <h3>セットアップの流れ</h3>
+    <ol>
+      <li>メモリを増設（8GBモジュール追加 → 合計12GB）</li>
+      <li>WindowsのスタートアップにPythonスクリプトを登録</li>
+      <li>ACアダプタを常時接続して、蓋を閉じてもスリープしない設定に変更</li>
+      <li>リモートデスクトップを有効化して、メインPCから操作できるように設定</li>
+    </ol>
+
+    <div class="story-box">
+      <p class="story-box-title">💡 ポイント</p>
+      <p style="margin:0;font-size:0.9rem;color:var(--text-mid)">ノートPCはACアダプタで給電しながら「蓋を閉じてもスリープしない」設定にするのが肝心。これだけで棚やデスクの隅にコンパクトに置いておける常時稼働マシンが完成する。</p>
+    </div>
+  </section>
+
+  <!-- Potential -->
+  <section class="section" id="potential">
+    <h2>12GBメモリの余力でできること</h2>
+
+    <p>自動売買プログラムを動かしてもメモリには余裕がある。このリソースを活かして、もう1〜2個の新規プロジェクトを追加しようと考えている。</p>
+
+    <ul class="usecase-list">
+      <li>
+        <div class="usecase-icon">📈</div>
+        <div class="usecase-body">
+          <strong>仮想通貨の自動売買（複数銘柄対応）</strong>
+          現在は1銘柄のみだが、プロセスを増やして複数通貨ペアを同時に監視・取引することも可能。
+        </div>
+      </li>
+      <li>
+        <div class="usecase-icon">🔄</div>
+        <div class="usecase-body">
+          <strong>定期実行スクリプト（データ収集・バックアップ）</strong>
+          cronやタスクスケジューラで定期実行するデータ収集・通知・バックアップ系の処理。
+        </div>
+      </li>
+      <li>
+        <div class="usecase-icon">🌐</div>
+        <div class="usecase-body">
+          <strong>ローカル開発サーバー / API サーバー</strong>
+          自宅LAN内の開発用サーバーとして使えば、どのデバイスからでもアクセスできる。
+        </div>
+      </li>
+      <li>
+        <div class="usecase-icon">🤖</div>
+        <div class="usecase-body">
+          <strong>Bot やスクレイピングの常時稼働</strong>
+          SNS Bot、価格監視スクレイパー、通知システムなどをバックグラウンドで動かす。
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <!-- Recommend -->
+  <section class="section" id="recommend">
+    <h2>コスパ最強のおすすめノートPC 2選</h2>
+
+    <p>「余りPCが家にない」「もう少しまともなスペックで始めたい」という方には、最初から専用機として安いノートPCを1台買うのがおすすめだ。中古でも新品でも、サーバー用途なら過剰スペックは不要。ここでは実際に使えると思った2モデルを紹介する。</p>
+
+    <!-- Product 1: New -->
+    <div class="product-card">
+      <div class="product-card-header">
+        <span class="product-badge new">新品</span>
+        <span class="product-card-title">14インチ 新品ノートPC｜Office搭載・メモリ12GB・Win11 Pro</span>
+      </div>
+      <div class="product-point">
+        <strong>最初からメモリ12GB搭載</strong>なので、増設作業なしでそのまま使える。Office・Win11 Pro付きで即戦力。
+      </div>
+      <div class="product-spec-grid">
+        <div class="product-spec-item">
+          <div class="label">CPU</div>
+          <div class="value">Celeron</div>
+        </div>
+        <div class="product-spec-item">
+          <div class="label">メモリ</div>
+          <div class="value">12 GB</div>
+        </div>
+        <div class="product-spec-item">
+          <div class="label">ストレージ</div>
+          <div class="value">SSD 256GB</div>
+        </div>
+        <div class="product-spec-item">
+          <div class="label">OS</div>
+          <div class="value">Win11 Pro</div>
+        </div>
+        <div class="product-spec-item">
+          <div class="label">Office</div>
+          <div class="value">搭載</div>
+        </div>
+        <div class="product-spec-item">
+          <div class="label">画面</div>
+          <div class="value">14インチ</div>
+        </div>
+      </div>
+      <p style="font-size:0.85rem;color:var(--text-mid);margin-bottom:0">Webカメラ・WiFi・Bluetooth・日本語キーボード対応。薄型軽量でデスクの隅に置きやすい。カラーはピンク・シルバーから選択可。</p>
+      <div class="product-widget">
+        <table border="0" cellpadding="0" cellspacing="0"><tr><td><div style="border:1px solid #95a5a6;border-radius:.75rem;background-color:#FFFFFF;width:504px;margin:0px;padding:5px;text-align:center;overflow:hidden;"><table><tr><td style="width:240px"><a href="https://hb.afl.rakuten.co.jp/ichiba/53c3286c.cc4e3b65.53c3286d.5ebb7e2f/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fdigitalcon%2F14q8r%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjAsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D" target="_blank" rel="nofollow sponsored noopener" style="word-wrap:break-word;"><img src="https://hbb.afl.rakuten.co.jp/hgb/53c3286c.cc4e3b65.53c3286d.5ebb7e2f/?me_id=1412923&item_id=10000246&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fdigitalcon%2Fcabinet%2F14q8r%2Fimgrc0192873614.jpg%3F_ex%3D240x240&s=240x240&t=picttext" border="0" style="margin:2px" alt="新品ノートPC 14インチ メモリ12GB" title=""></a></td><td style="vertical-align:top;width:248px;display: block;"><p style="font-size:12px;line-height:1.4em;text-align:left;margin:0px;padding:2px 6px;word-wrap:break-word"><a href="https://hb.afl.rakuten.co.jp/ichiba/53c3286c.cc4e3b65.53c3286d.5ebb7e2f/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fdigitalcon%2F14q8r%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjAsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D" target="_blank" rel="nofollow sponsored noopener" style="word-wrap:break-word;">ノートパソコン 新品 14インチ Office搭載 Win11 Pro 日本語キーボード メモリ 12GB SSD 256GB Celeron Webカメラ WiFi Bluetooth 選べるカラー 14型 薄型 軽量 初心者 学習用 PC ピンク シルバー【最短当日出荷】</a></p><div style="margin:10px;"><a href="https://hb.afl.rakuten.co.jp/ichiba/53c3286c.cc4e3b65.53c3286d.5ebb7e2f/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fdigitalcon%2F14q8r%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjAsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D" target="_blank" rel="nofollow sponsored noopener" style="word-wrap:break-word;"><img src="https://static.affiliate.rakuten.co.jp/makelink/rl.svg" style="float:left;max-height:27px;width:auto;margin-top:0" ></a><a href="https://hb.afl.rakuten.co.jp/ichiba/53c3286c.cc4e3b65.53c3286d.5ebb7e2f/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fdigitalcon%2F14q8r%2F%3Fscid%3Daf_pc_bbtn&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjAsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ==" target="_blank" rel="nofollow sponsored noopener" style="word-wrap:break-word;"><div style="float:right;width:41%;height:27px;background-color:#bf0000;color:#fff!important;font-size:12px;font-weight:500;line-height:27px;margin-left:1px;padding: 0 12px;border-radius:16px;cursor:pointer;text-align:center;"> 楽天で購入 </div></a></div></td></tr></table></div></td></tr></table>
+      </div>
+    </div>
+
+    <!-- Product 2: Used -->
+    <div class="product-card">
+      <div class="product-card-header">
+        <span class="product-badge used">中古</span>
+        <span class="product-card-title">中古ノートPC Core i5 第8世代｜Win11 + Office付き・15.6インチ</span>
+      </div>
+      <div class="product-point">
+        <strong>Core i5 第8世代はCeleronより処理能力が高く</strong>、複数の重めなプロセスを同時に動かすならこちらが向いている。中古なので価格も抑えられる。
+      </div>
+      <div class="product-spec-grid">
+        <div class="product-spec-item">
+          <div class="label">CPU</div>
+          <div class="value">Core i5 第8世代</div>
+        </div>
+        <div class="product-spec-item">
+          <div class="label">OS</div>
+          <div class="value">Win11</div>
+        </div>
+        <div class="product-spec-item">
+          <div class="label">Office</div>
+          <div class="value">付属</div>
+        </div>
+        <div class="product-spec-item">
+          <div class="label">画面</div>
+          <div class="value">15.6インチ</div>
+        </div>
+        <div class="product-spec-item">
+          <div class="label">テンキー</div>
+          <div class="value">付き</div>
+        </div>
+        <div class="product-spec-item">
+          <div class="label">保証</div>
+          <div class="value">最大180日</div>
+        </div>
+      </div>
+      <p style="font-size:0.85rem;color:var(--text-mid);margin-bottom:0">楽天市場カテゴリ1位実績。中古でも最大180日保証があるので安心して購入できる。</p>
+      <div class="product-widget">
+        <table border="0" cellpadding="0" cellspacing="0"><tr><td><div style="border:1px solid #95a5a6;border-radius:.75rem;background-color:#FFFFFF;width:504px;margin:0px;padding:5px;text-align:center;overflow:hidden;"><table><tr><td style="width:240px"><a href="https://hb.afl.rakuten.co.jp/ichiba/53c343b4.588a6a1c.53c343b5.a8debea9/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fpc-smile%2Fnp_omakase_ms%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjAsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D" target="_blank" rel="nofollow sponsored noopener" style="word-wrap:break-word;"><img src="https://hbb.afl.rakuten.co.jp/hgb/53c343b4.588a6a1c.53c343b5.a8debea9/?me_id=1401564&item_id=10000182&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fpc-smile%2Fcabinet%2F12013057%2F12868659%2Fi5-8_20260506.jpg%3F_ex%3D240x240&s=240x240&t=picttext" border="0" style="margin:2px" alt="中古ノートPC Core i5 第8世代" title=""></a></td><td style="vertical-align:top;width:248px;display: block;"><p style="font-size:12px;line-height:1.4em;text-align:left;margin:0px;padding:2px 6px;word-wrap:break-word"><a href="https://hb.afl.rakuten.co.jp/ichiba/53c343b4.588a6a1c.53c343b5.a8debea9/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fpc-smile%2Fnp_omakase_ms%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjAsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D" target="_blank" rel="nofollow sponsored noopener" style="word-wrap:break-word;">超得2,000円OFF｜新生活応援 豪華特典付き｜楽天1位 三冠獲得 ｜最大180日保証｜Core i5 第8世代｜中古ノートパソコン Windows11 office付き｜中古ノートパソコン 15.6テンキー付き</a></p><div style="margin:10px;"><a href="https://hb.afl.rakuten.co.jp/ichiba/53c343b4.588a6a1c.53c343b5.a8debea9/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fpc-smile%2Fnp_omakase_ms%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjAsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D" target="_blank" rel="nofollow sponsored noopener" style="word-wrap:break-word;"><img src="https://static.affiliate.rakuten.co.jp/makelink/rl.svg" style="float:left;max-height:27px;width:auto;margin-top:0" ></a><a href="https://hb.afl.rakuten.co.jp/ichiba/53c343b4.588a6a1c.53c343b5.a8debea9/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fpc-smile%2Fnp_omakase_ms%2F%3Fscid%3Daf_pc_bbtn&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjAsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ==" target="_blank" rel="nofollow sponsored noopener" style="word-wrap:break-word;"><div style="float:right;width:41%;height:27px;background-color:#bf0000;color:#fff!important;font-size:12px;font-weight:500;line-height:27px;margin-left:1px;padding: 0 12px;border-radius:16px;cursor:pointer;text-align:center;"> 楽天で購入 </div></a></div></td></tr></table></div></td></tr></table>
+      </div>
+    </div>
+
+    <div class="cta-block">
+      <p>どちらもサーバー用途・常時稼働に必要十分なスペック。<br>増設不要ですぐ使いたいなら新品、コストを抑えたいなら中古がおすすめ。</p>
+      <a href="https://hb.afl.rakuten.co.jp/ichiba/53c3286c.cc4e3b65.53c3286d.5ebb7e2f/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fdigitalcon%2F14q8r%2F%3Fscid%3Daf_pc_bbtn&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjAsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ==" rel="nofollow sponsored noopener" target="_blank" class="cta-btn">新品 14インチ（メモリ12GB）を楽天で見る</a>
+      <p style="margin-top:14px">
+        <a href="https://hb.afl.rakuten.co.jp/ichiba/53c343b4.588a6a1c.53c343b5.a8debea9/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fpc-smile%2Fnp_omakase_ms%2F%3Fscid%3Daf_pc_bbtn&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjAsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ==" rel="nofollow sponsored noopener" target="_blank" style="color:rgba(255,255,255,0.7);font-size:0.85rem;text-decoration:underline;">中古 Core i5（楽天1位・180日保証）を見る →</a>
+      </p>
+      <p class="ad-note">※本リンクはアフィリエイト広告（楽天アフィリエイト）です</p>
+    </div>
+  </section>
+
+  <!-- Merit -->
+  <section class="section" id="merit">
+    <h2>メリット・注意点</h2>
+
+    <div class="merit-box">
+      <h3>✅ 自宅PCサーバーのメリット</h3>
+      <ul class="merit-list">
+        <li>クラウドと違い、ランニングコストが電気代だけ</li>
+        <li>余っているPCがあれば実質ゼロ円で始められる</li>
+        <li>物理的に手元にあるので、何か問題があれば即対応できる</li>
+        <li>スペックに余裕があれば複数のプロジェクトを並行実行できる</li>
+        <li>中古・格安の新品PCでも十分に機能する</li>
+      </ul>
+    </div>
+
+    <div class="caution-box">
+      <h3>△ 注意点</h3>
+      <ul class="caution-list">
+        <li>自宅のインターネット回線が落ちるとプログラムも止まる</li>
+        <li>常時稼働のため電気代と発熱への配慮が必要（ノートPCはACアダプタ給電推奨）</li>
+        <li>クラウドと違い、スペック不足になっても即時拡張はできない</li>
+        <li>古いPCは内部の埃清掃をしてから長期運用に備えるのが安心</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section" id="faq">
+    <h2>よくある質問</h2>
+
+    <div class="faq-item">
+      <div class="faq-q"><span class="faq-icon-q">Q</span>自宅のノートPCをサーバー代わりに使うときの注意点は？</div>
+      <div class="faq-a"><span class="faq-icon-a">A</span>常時起動のため電気代と発熱に注意が必要です。ACアダプタで給電し、蓋を閉じてもスリープしない設定にすることと、定期的に内部の埃を清掃することで長期運用が安定します。また自宅のインターネット回線が止まるとプログラムも止まるため、回線の安定性を事前に確認しておくと安心です。</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q"><span class="faq-icon-q">Q</span>メモリは何GB以上あればサーバー用途に使えますか？</div>
+      <div class="faq-a"><span class="faq-icon-a">A</span>軽いプログラムを1〜2個動かす程度であれば8GBで十分な場合が多いです。複数のプロセスを並行して動かしたいなら12GB以上あると余裕が生まれます。今回紹介している新品ノートPCは最初から12GB搭載なので増設不要です。</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q"><span class="faq-icon-q">Q</span>クラウドサービスと自宅PC、どちらが安いですか？</div>
+      <div class="faq-a"><span class="faq-icon-a">A</span>既にPCがある場合は自宅PCが圧倒的に安く、ランニングコストは電気代のみです。新しくPCを購入する場合でも、1〜2年で初期費用をクラウドの月額費用が上回るケースがほとんどです。「ずっと動かし続ける」用途であれば、自宅PCのほうが長期コストは安くなります。</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q"><span class="faq-icon-q">Q</span>古いPCでも24時間稼働に耐えられますか？</div>
+      <div class="faq-a"><span class="faq-icon-a">A</span>CPUやメモリのスペックが最低限あれば問題ありません。ただし冷却ファンが詰まっていたり、バッテリーが劣化していると過熱・シャットダウンのリスクがあります。ACアダプタで常時給電し、バッテリーに頼らない運用にするのがポイントです。</div>
+    </div>
+  </section>
+
+  <!-- Summary -->
+  <section class="section" id="summary">
+    <h2>まとめ</h2>
+
+    <p>「24時間プログラムを動かし続けたいけど、クラウドは料金が気になる」という問題の答えは、意外と身近なところにあった。</p>
+    <p>家に眠っている古いノートPCにメモリを足してあげるだけで、月額ゼロ円の専用実行環境が完成する。しかもリソースに余裕があれば、自動売買以外の用途にも使い回せる。</p>
+
+    <div class="summary-box">
+      <ul>
+        <li>24時間プログラムを動かすには専用マシンがあると便利</li>
+        <li>クラウドは手軽だが、長期運用では自宅PCのほうがコストが安い</li>
+        <li>メモリ12GBあれば複数プロセスを並行実行しても余裕</li>
+        <li>余りPCがない場合は安い新品 or 中古ノートPCを1台買うのがおすすめ</li>
+        <li>中古でも十分。保証付きの中古なら安心して使い始められる</li>
+      </ul>
+    </div>
+
+    <div class="cta-block">
+      <p>「メモリ12GB・Office付き」の新品なら増設作業なしで今日から使える</p>
+      <a href="https://hb.afl.rakuten.co.jp/ichiba/53c3286c.cc4e3b65.53c3286d.5ebb7e2f/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fdigitalcon%2F14q8r%2F%3Fscid%3Daf_pc_bbtn&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjAsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ==" rel="nofollow sponsored noopener" target="_blank" class="cta-btn">新品 14インチ（メモリ12GB）を楽天で見る</a>
+      <p style="margin-top:14px">
+        <a href="https://hb.afl.rakuten.co.jp/ichiba/53c343b4.588a6a1c.53c343b5.a8debea9/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fpc-smile%2Fnp_omakase_ms%2F%3Fscid%3Daf_pc_bbtn&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjAsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ==" rel="nofollow sponsored noopener" target="_blank" style="color:rgba(255,255,255,0.7);font-size:0.85rem;text-decoration:underline;">中古 Core i5（楽天1位・180日保証）を見る →</a>
+      </p>
+      <p class="ad-note">※本リンクはアフィリエイト広告（楽天アフィリエイト）です</p>
+    </div>
+  </section>
+
+</div><!-- /container -->
+
+<!-- Mobile Float CTA -->
+<div class="float-cta">
+  <div class="float-cta-text">
+    <strong>コスパ最強ノートPC</strong> 新品 or 中古<br>
+    <span style="font-size:0.65rem;opacity:0.7;">楽天アフィリエイト広告 / PR</span>
+  </div>
+  <a href="https://hb.afl.rakuten.co.jp/ichiba/53c3286c.cc4e3b65.53c3286d.5ebb7e2f/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fdigitalcon%2F14q8r%2F%3Fscid%3Daf_pc_bbtn&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjAsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ==" rel="nofollow sponsored noopener" target="_blank" class="float-cta-btn">楽天で見る</a>
+</div>
+
+<footer class="footer">
+  <p>本記事はアフィリエイト広告（楽天アフィリエイト）を含みます（PR）。<br>
+  記事内の情報は執筆時点のものです。価格・仕様は変動する場合があります。最新情報は各商品ページでご確認ください。</p>
+  <p style="margin-top:14px"><a href="../index.html">← トップページに戻る</a></p>
+</footer>
+
+</body>
+</html>
